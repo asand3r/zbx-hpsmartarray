@@ -72,5 +72,5 @@ In addition I've attached preconfigured Zabbix Template here, so you can use it 
 Have fun and rate it on [share.zabbix.com](https://share.zabbix.com/storage-devices/hp/hp-smart-array-controller) if you like it. =)
 
 **Tested with**:  
-HP SmartArray P800, Smart Array P420i, Smart Array P440ar, Smart Array B110i
+HP SmartArray P800, Smart Array P420i, Smart Array P440ar, Smart Array B110i, Dynamic Smart Array B140i, Dynamic Smart Array B120i RAID, Smart HBA H240
 

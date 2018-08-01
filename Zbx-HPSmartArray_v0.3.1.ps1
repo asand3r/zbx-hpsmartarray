@@ -67,14 +67,14 @@ if (! (Test-Path $ssacli)) {
 }
 
 # Determine which controller id is provided
-if ($ctrlid -match "^\d{1,}\w?$") {
+if ($ctrlid -match "^\d$") {
     $ctrid_type = "slot"
 } else {
     $ctrid_type = "sn"
 }
 
 # Detect all HP Smart Array Controllers
-$all_ctrls = & "$ssacli" "ctrl all show".Split() | Where-Object {$_ -match "^Smart Array"}
+$all_ctrls = & "$ssacli" "ctrl all show".Split() | Where-Object {$_ -match "^Smart Array|^Smart HBA|^Dynamic Smart Array"}
 # Global string to store formed LLD string
 $lld_data = ""
 
@@ -148,12 +148,12 @@ function Get-CtrlStatus() {
     $ctrl_status = & "$ssacli" "ctrl $($ctrid_type)=$($ctrlid) show status".Split() | Where-Object {$_ -match "controller status|cache status|battery.*status"}
     if ($ctrl_status.Length -eq 3) {
         switch ($ctrl_part) {
-            "main" {return ($ctrl_status[0] -replace ".+:\s")}
+            "main" {return ($ctrl_status[0] -replace ".+:\s" -replace 'Other','1' -replace 'OK','2' -replace 'Degraded','3' -replace 'Failed','4')}
             "cache" {return ($ctrl_status[1] -replace ".+:\s")}
             "batt" {return ($ctrl_status[2] -replace ".+:\s")}
         }
     } else {
-        return ($ctrl_status -replace ".+:\s")
+        return ($ctrl_status -replace ".+:\s" -replace 'Other','1' -replace 'OK','2' -replace 'Degraded','3' -replace 'Failed','4')
     }
 }
 
@@ -167,7 +167,16 @@ function Get-LDStatus() {
     )
 
     $ld_status = & "$ssacli" "ctrl $($ctrid_type)=$($ctrlid) ld $($ldnum) show status".Split() | Where-Object {$_ -match 'logicaldrive \d'}
-    return ($ld_status -replace '.+:\s')
+    $ld_status = $ld_status -replace '.+:\s' -replace 'Other','1' -replace 'OK','2' -replace 'Failed','3' -replace 'Unconfigured','4' `
+             -replace 'Recovering','5' -replace 'Interim Recovery Mode','5' -replace 'Ready Rebuild','6' -replace 'Rebuilding','7' -replace 'Wrong Drive','8' -replace 'Bad Connect','9' `
+             -replace 'Overheating','10' -replace 'Shutdown','11'  -replace 'Expanding','12' -replace 'Not Available','13' -replace 'Queued For Expansion','14' `
+             -replace 'Multi-path Access Degraded','15' -replace 'Erasing','16' -replace 'Predictive Spare Rebuild Ready','17' -replace 'Rapid Parity Initialization In Progress','18' `
+             -replace 'Rapid Parity Initialization Pending','19' -replace 'No Access - Encrypted - Missing Key','20' `
+             -replace 'Unencrypted to Encrypted Transformation in Progress','21' -replace 'New Logical Drive Key Rekey in Progress','22' `
+             -replace 'No Access - Encrypted with Controller Encryption Not Enabled','23' -replace 'Unencrypted To Encrypted Transformation Not Started','24' `
+             -replace 'New Logical Drive Key Rekey Request Received','25'
+
+    return $ld_status
 }
 
 # Gets physical drive status
@@ -179,7 +188,8 @@ function Get-PDStatus() {
         [string]$pdnum
     )
     $pd_status = & "$ssacli" "ctrl $($ctrid_type)=$($ctrlid) pd $($pdnum) show status".Split() | Where-Object {$_ -match 'physicaldrive \d'}
-    return ($pd_status -replace '.+\:\s')
+    return ($pd_status -replace '.+\:\s' -replace 'Other','1'  -replace 'OK','2' -replace 'Failed','3' -replace 'Predictive Failure','4' `
+                        -replace 'Erasing','5' -replace 'Erase Done','6' -replace 'Erase Pending','7' -replace 'SSD Wear Out','8' -replace 'Not Authenticated','9')
 }
 
 switch ($action) {

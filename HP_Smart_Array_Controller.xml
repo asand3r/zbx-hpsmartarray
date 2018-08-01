@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.4</version>
-    <date>2018-07-30T11:38:22Z</date>
+    <date>2018-08-01T12:42:10Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -59,7 +59,7 @@
                         <formula/>
                         <conditions/>
                     </filter>
-                    <lifetime>1d</lifetime>
+                    <lifetime>7d</lifetime>
                     <description>Discovery all HP Smart Array Controllers on the server.</description>
                     <item_prototypes>
                         <item_prototype>
@@ -68,11 +68,11 @@
                             <snmp_community/>
                             <snmp_oid/>
                             <key>hp.smartarray[health,ctrl,{#CTRL.SLOT},batt]</key>
-                            <delay>{$UPDATE}</delay>
-                            <history>{$HISTORY}</history>
-                            <trends>0</trends>
+                            <delay>5m</delay>
+                            <history>1w</history>
+                            <trends>365d</trends>
                             <status>0</status>
-                            <value_type>1</value_type>
+                            <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
                             <snmpv3_contextname/>
@@ -97,7 +97,9 @@
                                     <name>HP Smart Array Controllers</name>
                                 </application>
                             </applications>
-                            <valuemap/>
+                            <valuemap>
+                                <name>HP Controller Status</name>
+                            </valuemap>
                             <logtimefmt/>
                             <preprocessing/>
                             <jmx_endpoint/>
@@ -110,11 +112,11 @@
                             <snmp_community/>
                             <snmp_oid/>
                             <key>hp.smartarray[health,ctrl,{#CTRL.SLOT},cache]</key>
-                            <delay>{$UPDATE}</delay>
-                            <history>{$HISTORY}</history>
-                            <trends>0</trends>
+                            <delay>5m</delay>
+                            <history>1w</history>
+                            <trends>365d</trends>
                             <status>0</status>
-                            <value_type>1</value_type>
+                            <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
                             <snmpv3_contextname/>
@@ -139,7 +141,9 @@
                                     <name>HP Smart Array Controllers</name>
                                 </application>
                             </applications>
-                            <valuemap/>
+                            <valuemap>
+                                <name>HP Controller Status</name>
+                            </valuemap>
                             <logtimefmt/>
                             <preprocessing/>
                             <jmx_endpoint/>
@@ -152,11 +156,11 @@
                             <snmp_community/>
                             <snmp_oid/>
                             <key>hp.smartarray[health,ctrl,{#CTRL.SLOT},main]</key>
-                            <delay>{$UPDATE}</delay>
-                            <history>{$HISTORY}</history>
-                            <trends>0</trends>
+                            <delay>5m</delay>
+                            <history>1w</history>
+                            <trends>365d</trends>
                             <status>0</status>
-                            <value_type>1</value_type>
+                            <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
                             <snmpv3_contextname/>
@@ -181,7 +185,9 @@
                                     <name>HP Smart Array Controllers</name>
                                 </application>
                             </applications>
-                            <valuemap/>
+                            <valuemap>
+                                <name>HP Controller Status</name>
+                            </valuemap>
                             <logtimefmt/>
                             <preprocessing/>
                             <jmx_endpoint/>
@@ -191,7 +197,7 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{HP Smart Array Monitoring:hp.smartarray[health,ctrl,{#CTRL.SLOT},batt].count(#5,OK,ne)}&gt;3</expression>
+                            <expression>{HP Smart Array Monitoring:hp.smartarray[health,ctrl,{#CTRL.SLOT},batt].count(#5,2,ne)}&gt;3</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>Smart Array Controller Battery status</name>
@@ -212,7 +218,7 @@
                             </tags>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{HP Smart Array Monitoring:hp.smartarray[health,ctrl,{#CTRL.SLOT},cache].count(#5,OK,ne)}&gt;3</expression>
+                            <expression>{HP Smart Array Monitoring:hp.smartarray[health,ctrl,{#CTRL.SLOT},cache].count(#5,2,ne)}&gt;3</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>Smart Array Controller Cache status</name>
@@ -233,7 +239,7 @@
                             </tags>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{HP Smart Array Monitoring:hp.smartarray[health,ctrl,{#CTRL.SLOT},main].count(#5,OK,ne)}&gt;3</expression>
+                            <expression>{HP Smart Array Monitoring:hp.smartarray[health,ctrl,{#CTRL.SLOT},main].count(#5,2,ne)}&gt;3</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>Smart Array Controller Main status</name>
@@ -287,7 +293,7 @@
                         <formula/>
                         <conditions/>
                     </filter>
-                    <lifetime>1d</lifetime>
+                    <lifetime>7d</lifetime>
                     <description>Discover of all logical drives on Smart Array Controller.</description>
                     <item_prototypes>
                         <item_prototype>
@@ -296,11 +302,11 @@
                             <snmp_community/>
                             <snmp_oid/>
                             <key>hp.smartarray[health,ld,{#CTRL.SLOT},{#LD.NUM}]</key>
-                            <delay>{$UPDATE}</delay>
-                            <history>{$HISTORY}</history>
-                            <trends>0</trends>
+                            <delay>5m</delay>
+                            <history>1w</history>
+                            <trends>365d</trends>
                             <status>0</status>
-                            <value_type>1</value_type>
+                            <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
                             <snmpv3_contextname/>
@@ -325,7 +331,9 @@
                                     <name>HP Smart Array Logical Drives</name>
                                 </application>
                             </applications>
-                            <valuemap/>
+                            <valuemap>
+                                <name>HP Logical Drive Status</name>
+                            </valuemap>
                             <logtimefmt/>
                             <preprocessing/>
                             <jmx_endpoint/>
@@ -335,7 +343,7 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{HP Smart Array Monitoring:hp.smartarray[health,ld,{#CTRL.SLOT},{#LD.NUM}].count(#5,OK,ne)}&gt;3</expression>
+                            <expression>{HP Smart Array Monitoring:hp.smartarray[health,ld,{#CTRL.SLOT},{#LD.NUM}].count(#5,2,ne)}&gt;3</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>Smart Array Controller Logical Drive {#LD.NUM} status</name>
@@ -389,7 +397,7 @@
                         <formula/>
                         <conditions/>
                     </filter>
-                    <lifetime>1d</lifetime>
+                    <lifetime>7d</lifetime>
                     <description>Discovery all physical drives on HP Smart Array Controller.</description>
                     <item_prototypes>
                         <item_prototype>
@@ -398,11 +406,11 @@
                             <snmp_community/>
                             <snmp_oid/>
                             <key>hp.smartarray[health,pd,{#CTRL.SLOT},&quot;{#PD.NUM}&quot;]</key>
-                            <delay>{$UPDATE}</delay>
-                            <history>{$HISTORY}</history>
-                            <trends>0</trends>
+                            <delay>5m</delay>
+                            <history>1w</history>
+                            <trends>365d</trends>
                             <status>0</status>
-                            <value_type>1</value_type>
+                            <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
                             <snmpv3_contextname/>
@@ -427,7 +435,9 @@
                                     <name>HP Smart Array Physical Drives</name>
                                 </application>
                             </applications>
-                            <valuemap/>
+                            <valuemap>
+                                <name>HP Physical Drive Status</name>
+                            </valuemap>
                             <logtimefmt/>
                             <preprocessing/>
                             <jmx_endpoint/>
@@ -437,7 +447,7 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{HP Smart Array Monitoring:hp.smartarray[health,pd,{#CTRL.SLOT},&quot;{#PD.NUM}&quot;].count(#5,OK,ne)}&gt;3</expression>
+                            <expression>{HP Smart Array Monitoring:hp.smartarray[health,pd,{#CTRL.SLOT},&quot;{#PD.NUM}&quot;].count(#5,2,ne)}&gt;3</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>Smart Array Controller Physical Drive {#PD.NUM} status</name>
@@ -478,4 +488,173 @@
             <screens/>
         </template>
     </templates>
+    <value_maps>
+        <value_map>
+            <name>HP Controller Status</name>
+            <mappings>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>Other</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>OK</newvalue>
+                </mapping>
+                <mapping>
+                    <value>3</value>
+                    <newvalue>Degraded</newvalue>
+                </mapping>
+                <mapping>
+                    <value>4</value>
+                    <newvalue>Failed</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+        <value_map>
+            <name>HP Logical Drive Status</name>
+            <mappings>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>Other</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>OK</newvalue>
+                </mapping>
+                <mapping>
+                    <value>3</value>
+                    <newvalue>Failed</newvalue>
+                </mapping>
+                <mapping>
+                    <value>4</value>
+                    <newvalue>Unconfigured</newvalue>
+                </mapping>
+                <mapping>
+                    <value>5</value>
+                    <newvalue>Recovering</newvalue>
+                </mapping>
+                <mapping>
+                    <value>6</value>
+                    <newvalue>Ready Rebuild</newvalue>
+                </mapping>
+                <mapping>
+                    <value>7</value>
+                    <newvalue>Rebuilding</newvalue>
+                </mapping>
+                <mapping>
+                    <value>8</value>
+                    <newvalue>Wrong Drive</newvalue>
+                </mapping>
+                <mapping>
+                    <value>9</value>
+                    <newvalue>Bad Connect</newvalue>
+                </mapping>
+                <mapping>
+                    <value>10</value>
+                    <newvalue>Overheating</newvalue>
+                </mapping>
+                <mapping>
+                    <value>11</value>
+                    <newvalue>Shutdown</newvalue>
+                </mapping>
+                <mapping>
+                    <value>12</value>
+                    <newvalue>Expanding</newvalue>
+                </mapping>
+                <mapping>
+                    <value>13</value>
+                    <newvalue>Not Available</newvalue>
+                </mapping>
+                <mapping>
+                    <value>14</value>
+                    <newvalue>Queued For Expansion</newvalue>
+                </mapping>
+                <mapping>
+                    <value>15</value>
+                    <newvalue>Multi-path Access Degraded</newvalue>
+                </mapping>
+                <mapping>
+                    <value>16</value>
+                    <newvalue>Erasing</newvalue>
+                </mapping>
+                <mapping>
+                    <value>17</value>
+                    <newvalue>Predictive Spare Rebuild Ready</newvalue>
+                </mapping>
+                <mapping>
+                    <value>18</value>
+                    <newvalue>Rapid Parity Initialization In Progress</newvalue>
+                </mapping>
+                <mapping>
+                    <value>19</value>
+                    <newvalue>Rapid Parity Initialization Pending</newvalue>
+                </mapping>
+                <mapping>
+                    <value>20</value>
+                    <newvalue>No Access - Encrypted - Missing Key</newvalue>
+                </mapping>
+                <mapping>
+                    <value>21</value>
+                    <newvalue>Unencrypted to Encrypted Transformation in Progress</newvalue>
+                </mapping>
+                <mapping>
+                    <value>22</value>
+                    <newvalue>New Logical Drive Key Rekey in Progress</newvalue>
+                </mapping>
+                <mapping>
+                    <value>23</value>
+                    <newvalue>No Access - Encrypted with Controller Encryption Not Enabled</newvalue>
+                </mapping>
+                <mapping>
+                    <value>24</value>
+                    <newvalue>Unencrypted To Encrypted Transformation Not Started</newvalue>
+                </mapping>
+                <mapping>
+                    <value>25</value>
+                    <newvalue>New Logical Drive Key Rekey Request Received</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+        <value_map>
+            <name>HP Physical Drive Status</name>
+            <mappings>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>Other</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>OK</newvalue>
+                </mapping>
+                <mapping>
+                    <value>3</value>
+                    <newvalue>Failed</newvalue>
+                </mapping>
+                <mapping>
+                    <value>4</value>
+                    <newvalue>Predictive Failure</newvalue>
+                </mapping>
+                <mapping>
+                    <value>5</value>
+                    <newvalue>Erasing</newvalue>
+                </mapping>
+                <mapping>
+                    <value>6</value>
+                    <newvalue>Erase Done</newvalue>
+                </mapping>
+                <mapping>
+                    <value>7</value>
+                    <newvalue>Erase Pending</newvalue>
+                </mapping>
+                <mapping>
+                    <value>8</value>
+                    <newvalue>SSD Wear Out</newvalue>
+                </mapping>
+                <mapping>
+                    <value>9</value>
+                    <newvalue>Not Authenticated</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+    </value_maps>
 </zabbix_export>
