@@ -89,7 +89,7 @@ def get_ldinfo(ld):
 
 def get_pdinfo(pd):
     try:
-        num = re.search("(\d+\w(:?\d){1,2})", pd).group(1)
+        num = re.search("(\d+\w(:?\d+){1,2})", pd).group(1)
     except:
         return None, None
     try:
