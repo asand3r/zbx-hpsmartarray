@@ -115,13 +115,12 @@ function Make-LLD() {
                     $all_pd = & "$ssacli" "ctrl slot=$($ctrl_slot) pd all show status".Split() | Where-Object {$_ -match "physicaldrive"}
                     
                     foreach ($pd in $all_pd) {
-                        if ($pd -match "physicaldrive (?<Num>\d{1,}\w(:\d{1,2}){1,2}) \(.+ (?<Capacity>\d{1,} [KGT]B?)(, \w+)?\)") {
-                            [array]$lld_obj_list += [psobject]@{"{#PD.NUM}" = $Matches.Num;
-                                                                "{#PD.CAPACITY}" = $Matches.Capacity;
-                                                                "{#CTRL.SLOT}" = $ctrl_slot;
-                                                                "{#CTRL.SN}" = $ctrl_sn;
-                                                                "{#CTRL.MODEL}" = $ctrl_model
-                                                                }
+                        if ($pd -match "physicaldrive (?<Num>\d{1,}\w(:\d{1,2}){1,2}) \(.+ (?<Capacity>\d{1,}(?:\.\d+)? [KGT]B?)(, \w+)?\)") {
+                            [array]$lld_obj_list += [pscustomobject]@{"{#PD.NUM}" = $Matches.Num;
+                                                                        "{#PD.CAPACITY}" = $Matches.Capacity;
+                                                                        "{#CTRL.SLOT}" = $ctrl_slot;
+                                                                        "{#CTRL.SN}" = $ctrl_sn;
+                                                                        "{#CTRL.MODEL}" = $ctrl_model}
                         }
                     }
             }
