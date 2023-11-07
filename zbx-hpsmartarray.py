@@ -89,15 +89,14 @@ def get_ldinfo(ld):
 
 def get_pdinfo(pd):
     try:
-        num = re.search("(\d+\w(:?\d){1,2})", pd).group(1)
+        num = re.search(r"(\d+\w(?:[:\d]{1,2}))", pd).group(1)
     except:
-        return None, None
+        num = None
     try:
-        capacity = re.search("(\d+ [KGT]B?)\)", pd).group(1)
+        capacity = re.search(r"(\d+(?:\.\d+)? [KGT]B?)\)", pd).group(1)
     except:
         capacity = "UNKNOWN"
     return num, capacity
-
 
 def make_lld(ssacli, part):
     cmd = [ssacli]
