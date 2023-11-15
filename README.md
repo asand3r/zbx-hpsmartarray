@@ -1,6 +1,8 @@
 # zbx-hpsmartarray
 PowerShell script for monitoring HP SmartArray RAID controllers (Zabbix)
-  
+
+This version is completely compatibile with RAIDs storage with "dot" capacity like 1.2 Tb etc.
+
 Zabbix Share page: https://share.zabbix.com/storage-devices/hp/hp-smart-array-controller  
 Also you can contact me with Telegram: @asand3r
 
